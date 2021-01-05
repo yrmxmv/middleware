@@ -9,4 +9,8 @@ class DashboardController extends Controller
     {
         return $this->render('index');
     }
+
+    public function actionSave()
+    {
+    }
 }
