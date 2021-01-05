@@ -9,6 +9,6 @@ $form = \yii\widgets\ActiveForm::begin(['id' => 'create-store']);
 echo $form->field($model, 'group_id')->dropDownList(\yii\helpers\ArrayHelper::map($group, 'group_id', 'name'));
 echo $form->field($model, 'name');
 echo $form->field($model, 'code');
-echo $form->field($model, 'is_active')->dropDownList([0 => 'Disabled', 1 => 'Enabled']);
+echo $form->field($model, 'is_active')->dropDownList(\app\code\store\models\source\Status::SOURCE);
 echo $form->field($model, 'sort_order');
 \yii\widgets\ActiveForm::end();
