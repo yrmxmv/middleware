@@ -1,4 +1,6 @@
 <?php
+
+use app\code\admin\models\source\Scope;
 use app\code\admin\models\source\Table;
 use yii\db\Migration;
 
@@ -33,10 +35,37 @@ class m210105_232230_core_config_table extends Migration
             'scope_id' => $this->integer(11)->defaultValue(0)->comment('Config Scope ID'),
             'path' => $this->char(255)->defaultValue('general')->comment('Config Path'),
             'value' => $this->text()->defaultValue(null)->comment('Config Value'),
-            'updated_at' => $this->integer(11)
+            'updated_at' => $this->integer(11)->comment('Updated At')
         ]);
     }
 
     protected function insertCoreConfigValues()
-    {}
+    {
+        $this->insert($this->core_config_table, [
+            'config_id' => null,
+            'scope' => Scope::WEBSITE_SCOPE,
+            'scope_id' => 2,
+            'path' => 'web/unsecure/base_url',
+            'value' => Yii::$app->request->getHostInfo(),
+            'updated_at' => time(),
+        ]);
+
+        $this->insert($this->core_config_table, [
+            'config_id' => null,
+            'scope' => Scope::DEFAULT_SCOPE,
+            'scope_id' => 1,
+            'path' => 'web/unsecure/base_url',
+            'value' => Yii::$app->request->getHostInfo(),
+            'updated_at' => time()
+        ]);
+
+        $this->insert($this->core_config_table, [
+            'config_id' => null,
+            'scope' => Scope::STORE_SCOPE,
+            'scope_id' => 2,
+            'path' => 'web/unsecure/base_url',
+            'value' => Yii::$app->request->getHostInfo(),
+            'updated_at' => time()
+        ]);
+    }
 }
