@@ -16,7 +16,6 @@ class m210105_232230_core_config_table extends Migration
     public function safeUp()
     {
         $this->createCoreConfigTable();
-        $this->insertCoreConfigValues();
     }
 
     /**
@@ -36,36 +35,6 @@ class m210105_232230_core_config_table extends Migration
             'path' => $this->char(255)->defaultValue('general')->comment('Config Path'),
             'value' => $this->text()->defaultValue(null)->comment('Config Value'),
             'updated_at' => $this->integer(11)->comment('Updated At')
-        ]);
-    }
-
-    protected function insertCoreConfigValues()
-    {
-        $this->insert($this->core_config_table, [
-            'config_id' => null,
-            'scope' => Scope::WEBSITE_SCOPE,
-            'scope_id' => 2,
-            'path' => 'web/unsecure/base_url',
-            'value' => Yii::$app->request->getHostInfo(),
-            'updated_at' => time(),
-        ]);
-
-        $this->insert($this->core_config_table, [
-            'config_id' => null,
-            'scope' => Scope::DEFAULT_SCOPE,
-            'scope_id' => 1,
-            'path' => 'web/unsecure/base_url',
-            'value' => Yii::$app->request->getHostInfo(),
-            'updated_at' => time()
-        ]);
-
-        $this->insert($this->core_config_table, [
-            'config_id' => null,
-            'scope' => Scope::STORE_SCOPE,
-            'scope_id' => 2,
-            'path' => 'web/unsecure/base_url',
-            'value' => Yii::$app->request->getHostInfo(),
-            'updated_at' => time()
         ]);
     }
 }

@@ -27,9 +27,9 @@ class m210105_200833_website_tables extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable($this->store_website_table);
-        $this->dropTable($this->store_group_table);
         $this->dropTable($this->store_table);
+        $this->dropTable($this->store_group_table);
+        $this->dropTable($this->store_website_table);
     }
 
     protected function createStoreTables()
