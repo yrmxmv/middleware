@@ -1,6 +1,15 @@
+<?php
+/**
+ * @var app\system\google\GoogleAPI $client
+*/
+?>
 <div>
     <a href="/admin/store/website/index">All Stores</a>
 </div>
+<div>
+    <a href="<?php echo $client->createGoogleAuthUrl(); ?>">GoogleAuthUrl</a>
+</div>
+
 <div>
     <?php $form = \yii\widgets\ActiveForm::begin(['id' => 'op']); ?>
         <select name="test[groups_seo_fields_use_rewrites_value]">

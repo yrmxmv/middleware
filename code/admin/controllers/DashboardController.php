@@ -3,13 +3,19 @@ namespace app\code\admin\controllers;
 
 use app\code\admin\models\CoreConfig;
 use app\code\admin\models\source\Scope;
+use app\system\google\GoogleAPI;
 use yii\web\Controller;
 
 class DashboardController extends Controller
 {
     public function actionIndex()
     {
-        return $this->render('index');
+        $client = new GoogleAPI();
+        $client->createGoogleAuthUrl();
+
+        return $this->render('index', [
+            'client' => $client
+        ]);
     }
 
     public function actionSave()
