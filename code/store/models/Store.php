@@ -19,6 +19,7 @@ class Store extends ActiveRecord
         return [
             [['name', 'code', 'group_id'], 'required'],
             [['name', 'code'], 'string'],
+            ['code', 'unique', 'targetClass' => self::class, 'message' => 'This code has already been taken.'],
             [['website_id', 'group_id', 'sort_order', 'is_active'], 'integer'],
         ];
     }
@@ -31,6 +32,10 @@ class Store extends ActiveRecord
     public function afterSave($insert, $changedAttributes)
     {
         parent::afterSave($insert, $changedAttributes);
-        Site::create($this);
+        if ($insert) {
+            Site::create($this);
+        } else if (isset($changedAttributes['code'])) {
+            Site::update($changedAttributes['code'], $this);
+        }
     }
 }

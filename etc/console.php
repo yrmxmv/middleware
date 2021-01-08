@@ -12,6 +12,11 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
         '@tests' => '@app/tests',
     ],
+    'modules' => [
+        'cron' => [
+            'class' => 'vasadibt\cron\Module',
+        ],
+    ],
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -27,13 +32,17 @@ $config = [
         'db' => $db,
     ],
     'params' => $params,
-    /*
     'controllerMap' => [
+        'migrate' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationPath' => [
+                '@vasadibt/cron/migrations',
+            ],
+        ],
         'fixture' => [ // Fixture generation command line.
             'class' => 'yii\faker\FixtureController',
         ],
     ],
-    */
 ];
 
 if (YII_ENV_DEV) {

@@ -3,18 +3,18 @@
 </div>
 <div>
     <?php $form = \yii\widgets\ActiveForm::begin(['id' => 'op']); ?>
-        <select name="groups[seo][fields][use_rewrites][value]">
+        <select name="test[groups_seo_fields_use_rewrites_value]">
             <option value="1">Yes</option>
             <option value="0">No</option>
         </select>
-        <input name="groups[unsecure][fields][base_url][value]" value="http://sales.net.ua/" type="text">
+        <input name="test[web_unsecure_base_url]" value="" type="text">
     <?php \yii\widgets\ActiveForm::end(); ?>
     <button id="form-in">Save</button>
 </div>
 <?php
 $js =<<<JS
 $('#form-in').on('click', function() {
-  $.post('', $('form#op').serialize());
+  $.post('/admin/dashboard/save', $('form#op').serialize());
 });
 JS;
 $this->registerJs($js, \app\system\AppView::POS_READY);

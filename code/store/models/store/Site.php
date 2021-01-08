@@ -59,4 +59,11 @@ class Site
             'value' => $migration->text()->defaultValue(null)->comment('Config Value'),
         ])->execute();
     }
+
+    public static function update($old, Store $store)
+    {
+        $table = 'core_config_store_' . $old;
+        $newName = 'core_config_store_' . $store->code;
+        Yii::$app->db->createCommand()->renameTable($table, $newName)->execute();
+    }
 }
